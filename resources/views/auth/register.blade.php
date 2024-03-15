@@ -66,8 +66,8 @@
                             <div class="col-md-6">
                                 <select id="role" name="role" class="form-control" required>
                                     <option value=""></option>
-                                    <option value="agent">Agent</option>
-                                    <option value="customer">Customer</option>
+                                    <option value="Agent">Agent</option>
+                                    <option value="Customer">Customer</option>
                                 </select>
                             </div>
                         </div>

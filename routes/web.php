@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\AgentDashboardController;
+use App\Http\Controllers\CustomerDashboardController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -18,3 +21,6 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('/customer/home', [CustomerDashboardController::class, 'index'])->name('customer.home');
+Route::get('/agent/home', [AgentDashboardController::class, 'index'])->name('agent.home');

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
@@ -35,5 +36,21 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
+    }
+
+    protected function authenticated(Request $request, $user)
+    {
+        // Determine the role of the authenticated user
+        $role = $user->role;
+
+        // Redirect the user based on their role
+        switch ($role) {
+            case 'agent':
+                return redirect()->route('agent.home');
+                break;
+            case 'customer':
+                return redirect()->route('customer.home');
+                break;
+        }
     }
 }
