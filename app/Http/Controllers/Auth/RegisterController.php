@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Auth;
 
 use App\User;
+use App\Agent;
+use App\Customer;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -53,6 +55,8 @@ class RegisterController extends Controller
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
             'role' => ['required', 'string', 'in:Agent,Customer'],
+            'phone' => ['required', 'string', 'max:10'], 
+            'address' => ['required', 'string', 'max:255'],
         ]);
     }
 
@@ -64,11 +68,32 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
+        $user = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
             'role' => $data['role'],
         ]);
+        if ($data['role'] === 'Agent') {
+            $agent = new Agent();
+            $agent->agent_id = $user->id;
+            $agent->name = $data['name'];
+            $agent->email = $data['email'];
+            $agent->phone_no = $data['phone'];
+            $agent->address = $data['address'];
+            $agent->save();
+        }
+        elseif ($data['role'] === 'Customer') {
+            $customer = new Customer();
+            $customer->customer_id = $user->id;
+            $customer->name = $data['name'];
+            $customer->email = $data['email'];
+            $customer->phone_no = $data['phone'];
+            $customer->address = $data['address'];
+            $customer->save();
+        }
+        return $user;
     }
+
+ 
 }
