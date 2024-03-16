@@ -49,6 +49,36 @@
                                 </li>
                             @endif
                         @else
+                        @if(Auth::user()->role === 'Admin')
+                        <!-- Customers Link -->
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('customer.home') }}">Customers</a>
+                        </li>
+                        <!-- Agents Link -->
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('agent.home') }}">Agents</a>
+                        </li>
+                        <!-- Policies Link -->
+                        <li class="nav-item">
+                            <a class="nav-link" >Policies</a>
+                        </li>
+                    @endif
+            
+                    <!-- Agent Role -->
+                    @if(Auth::user()->role === 'Agent')
+                        <!-- Customers Link -->
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('customer.home') }}">Customers</a>
+                        </li>
+                    @endif
+            
+                    <!-- Customer Role -->
+                    @if(Auth::user()->role === 'Customer')
+                        <!-- Policies Link -->
+                        <li class="nav-item">
+                            <a class="nav-link" >Policies</a>
+                        </li>
+                    @endif
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }} <span class="caret"></span>

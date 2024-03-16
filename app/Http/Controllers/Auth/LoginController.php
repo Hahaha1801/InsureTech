@@ -45,10 +45,10 @@ class LoginController extends Controller
 
         // Redirect the user based on their role
         switch ($role) {
-            case 'agent':
+            case 'Agent':
                 return redirect()->route('agent.home');
                 break;
-            case 'customer':
+            case 'Customer':
                 return redirect()->route('customer.home');
                 break;
         }
