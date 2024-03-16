@@ -15,10 +15,11 @@ class CreateAgentsTable extends Migration
     {
         Schema::create('agents', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('first_name');
-            $table->string('last_name');
+            $table->unsignedBigInteger('agent_id');
+            $table->string('name');
             $table->string('email')->unique();
-            $table->rememberToken();
+            $table->string('phone_no');
+            $table->longtext('address');
             $table->timestamps();
         });
     }

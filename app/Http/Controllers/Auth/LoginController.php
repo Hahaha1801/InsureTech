@@ -38,19 +38,19 @@ class LoginController extends Controller
         $this->middleware('guest')->except('logout');
     }
 
-    protected function authenticated(Request $request, $user)
-    {
-        // Determine the role of the authenticated user
-        $role = $user->role;
+    // protected function authenticated(Request $request, $user)
+    // {
+    //     // Determine the role of the authenticated user
+    //     $role = $user->role;
 
-        // Redirect the user based on their role
-        switch ($role) {
-            case 'Agent':
-                return redirect()->route('agent.home');
-                break;
-            case 'Customer':
-                return redirect()->route('customer.home');
-                break;
-        }
-    }
+    //     // Redirect the user based on their role
+    //     switch ($role) {
+    //         case 'Agent':
+    //             return redirect()->route('agent.home');
+    //             break;
+    //         case 'Customer':
+    //             return redirect()->route('customer.home');
+    //             break;
+    //     }
+    // }
 }
