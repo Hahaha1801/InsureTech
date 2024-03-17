@@ -52,15 +52,16 @@
                         @if(Auth::user()->role === 'Admin')
                         <!-- Customers Link -->
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('customer.home') }}">Customers</a>
+                            <a class="nav-link" href="{{ route('home') }}">Home</a>
                         </li>
-                        <!-- Agents Link -->
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('agent.home') }}">Agents</a>
+                            <a class="nav-link" href="{{ route('agent.viewAll') }}">Agents</a>
                         </li>
-                        <!-- Policies Link -->
                         <li class="nav-item">
-                            <a class="nav-link" >Policies</a>
+                            <a class="nav-link" href="{{ route('customer.viewAll') }}">Customers</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link"  href="{{ route('home') }}" >Policies</a>
                         </li>
                     @endif
             
@@ -68,7 +69,13 @@
                     @if(Auth::user()->role === 'Agent')
                         <!-- Customers Link -->
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('customer.home') }}">Customers</a>
+                            <a class="nav-link" href="{{ route('home') }}">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('customer.viewAll') }}">Customers</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('home') }}">Policies</a>
                         </li>
                     @endif
             
@@ -76,7 +83,10 @@
                     @if(Auth::user()->role === 'Customer')
                         <!-- Policies Link -->
                         <li class="nav-item">
-                            <a class="nav-link" >Policies</a>
+                            <a class="nav-link" href="{{ route('home') }}">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link"  href="{{ route('home') }}">Policies</a>
                         </li>
                     @endif
                             <li class="nav-item dropdown">

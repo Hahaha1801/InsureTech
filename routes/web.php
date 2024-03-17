@@ -1,7 +1,8 @@
 <?php
 
-use App\Http\Controllers\AgentDashboardController;
-use App\Http\Controllers\CustomerDashboardController;
+
+use App\Http\Controllers\AgentController;
+use App\Http\Controllers\CustomerController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,5 +23,10 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('/customer/home', [CustomerDashboardController::class, 'index'])->name('customer.home');
-Route::get('/agent/home', [AgentDashboardController::class, 'index'])->name('agent.home');
+Route::get('/customers', [CustomerController::class, 'index'])->name('customer.viewAll');
+Route::get('/customer/{customer}', [CustomerController::class, 'show'])->name('customer.show');
+Route::delete('/customer/{customer}', [CustomerController::class, 'destroy'])->name('customer.destroy');
+
+Route::get('/agents', [AgentController::class, 'index'])->name('agent.viewAll');
+Route::get('/agent/{agent}', [AgentController::class, 'show'])->name('agent.show');
+Route::delete('/agent/{agent}', [AgentController::class, 'destroy'])->name('agent.destroy');
