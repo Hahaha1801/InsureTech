@@ -2,11 +2,11 @@
 
 @section('content')
 <div class="container">
-    {{-- <div class="row justify-content-center mb-3">
+    <div class="row justify-content-center mb-3">
         <div class="col-md-8">
-            <a href="{{ route('register') }}" class="btn btn-primary">Add Agent</a>
+            <a href="{{ route('register', ['role' => 'agent']) }}" class="btn btn-primary">New Agent</a>
         </div>
-    </div> --}}
+    </div>
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">

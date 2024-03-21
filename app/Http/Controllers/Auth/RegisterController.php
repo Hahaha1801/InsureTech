@@ -5,8 +5,10 @@ namespace App\Http\Controllers\Auth;
 use App\User;
 use App\Agent;
 use App\Customer;
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 
@@ -37,9 +39,17 @@ class RegisterController extends Controller
      *
      * @return void
      */
-    public function __construct()
+    // public function __construct()
+    // {
+    //     $this->middleware('guest');
+    // }
+
+    public function showRegistrationForm(Request $request)
     {
-        $this->middleware('guest');
+        Session::put('previous_user_id', auth()->id());
+
+        $role = $request->input('role');
+        return view('auth.register', ['role' => $role]);
     }
 
     /**
@@ -60,6 +70,19 @@ class RegisterController extends Controller
         ]);
     }
 
+
+    public function register(Request $request)
+    { 
+        $this->validator($request->all())->validate();
+
+        $user = $this->create($request->all());
+
+        $previousUserId = Session::get('previous_user_id');
+        auth()->loginUsingId($previousUserId);
+
+        return redirect()->route('home')->with('success', 'User registered successfully');
+    }
+    
     /**
      * Create a new user instance after a valid registration.
      *
@@ -95,5 +118,4 @@ class RegisterController extends Controller
         return $user;
     }
 
- 
 }

@@ -2,6 +2,12 @@
 
 @section('content')
 <div class="container">
+    <div class="row justify-content-center mb-3">
+        <div class="col-md-8">
+            <a href="{{ route('register', ['role' => 'customer']) }}" class="btn btn-primary">New Customer</a>
+
+        </div>
+    </div>
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
@@ -29,6 +35,7 @@
                                             @csrf
                                             @method('DELETE')
                                         </form>
+                                    
                                         <button type="button" class="btn btn-danger" onclick="confirmDelete({{ $customer->id }})">Delete</button>
                                     </td>
                                 </tr>
