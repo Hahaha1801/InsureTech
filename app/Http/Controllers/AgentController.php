@@ -11,7 +11,7 @@ class AgentController extends Controller
 {
     public function index()
     {
-        $agents = Agent::all(); // Fetch all customers from the database
+        $agents = Agent::all(); 
         return view('agent.viewAll', ['agents' => $agents]);
     }
     public function show(Agent $agent)
@@ -29,6 +29,6 @@ class AgentController extends Controller
         $agent->delete();
         $user->delete();
         
-        return redirect()->route('agent.viewAll')->with('success', 'Customer deleted successfully');
+        return redirect()->route('agent.viewAll')->with('success', 'Agent deleted successfully');
     }
 }

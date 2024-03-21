@@ -8,7 +8,14 @@
                 <div class="card-header">{{ __('Register') }}</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('register') }}">
+                    
+                                            @if($role === 'agent')
+                                            <form method="POST" action="{{ route('register', ['role' => 'agent']) }}" >
+                                            @else
+                                            <form method="POST" action="{{ route('register', ['role' => 'customer']) }}" >
+                                            @endif
+
+                    
                         @csrf
 
                         <div class="form-group row">
@@ -62,7 +69,6 @@
                                 @enderror
                             </div>
                         </div>
-                        
 
                         <div class="form-group row">
                             <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
@@ -90,12 +96,21 @@
                             <label for="role" class="col-md-4 col-form-label text-md-right">Role</label>
                             <div class="col-md-6">
                                 <select id="role" name="role" class="form-control" required>
-                                    <option value=""></option>
-                                    <option value="Agent">Agent</option>
-                                    <option value="Customer">Customer</option>
+                                    @if(auth()->user()->role === 'Admin')
+                                            @if($role === 'agent')
+                                                <option value="Agent" selected>Agent</option>
+                                                <option value="Customer">Customer</option>
+                                            @else
+                                                <option value="Agent">Agent</option>
+                                                <option value="Customer" selected>Customer</option>
+                                            @endif
+                                    @elseif(auth()->user()->role === 'Agent')
+                                        <option value="Customer">Customer</option>
+                                    @endif
                                 </select>
                             </div>
                         </div>
+                        
 
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
