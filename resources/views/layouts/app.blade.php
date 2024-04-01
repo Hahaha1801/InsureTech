@@ -40,6 +40,9 @@
                     <ul class="navbar-nav ml-auto">
                         <!-- Authentication Links -->
                         @guest
+                        {{-- <script type="text/javascript">
+                            window.location.href = "{{ route('/') }}";
+                        </script> --}}
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
                             </li>
@@ -56,7 +59,7 @@
                                 <a class="nav-link" href="{{ route('customer.viewAll') }}">Customers</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link"  href="{{ route('home') }}" >Policies</a>
+                                <a class="nav-link"  href="{{ route('policies.index') }}" >Policies</a>
                             </li>
                         @endif
             

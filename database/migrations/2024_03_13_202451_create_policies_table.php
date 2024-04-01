@@ -15,6 +15,29 @@ class CreatePoliciesTable extends Migration
     {
         Schema::create('policies', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->string('c_name');
+            $table->string('group');
+            $table->string('address');
+            $table->unsignedBigInteger('refered_by');
+            $table->string('mobile_no');
+            $table->string('insurer_name');
+            $table->string('p_type');
+            $table->string('p_name');
+            $table->integer('p_number');
+            $table->date('start_date');
+            $table->date('end_date');
+            $table->integer('sub_ins');
+            $table->integer('premium');
+            $table->integer('tp_motor');
+            $table->integer('basic');
+            $table->integer('terr');
+            $table->integer('eq');
+            $table->integer('other');
+            $table->integer('stfi');
+            $table->integer('gst');
+            $table->date('receipt_date');
+            $table->integer('total');
+            $table->longtext('remark');
             $table->timestamps();
         });
     }
