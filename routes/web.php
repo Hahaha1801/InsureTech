@@ -2,7 +2,11 @@
 
 
 use App\Http\Controllers\AgentController;
+
 use App\Http\Controllers\CustomerController;
+
+use App\Http\Controllers\PolicyController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -30,3 +34,14 @@ Route::delete('/customer/{customer}', [CustomerController::class, 'destroy'])->n
 Route::get('/agents', [AgentController::class, 'index'])->name('agent.viewAll');
 Route::get('/agent/{agent}', [AgentController::class, 'show'])->name('agent.show');
 Route::delete('/agent/{agent}', [AgentController::class, 'destroy'])->name('agent.destroy');
+
+// Route::get('/policies/create', [PolicyController::class, 'index'])->name('policy.createPolicy');
+// Route::post('/policies', [PolicyController::class, 'store'])->name('policies.store');
+
+Route::get('/policies', [PolicyController::class, 'index'])->name('policies.index');
+Route::get('/policies/create', [PolicyController::class, 'create'])->name('policies.create');
+Route::post('/policies', [PolicyController::class, 'store'])->name('policies.store');
+Route::get('/policies/{policy}', [PolicyController::class, 'show'])->name('policies.show');
+Route::get('/policies/{policy}/edit', [PolicyController::class, 'edit'])->name('policies.edit');
+Route::put('/policies/{policy}', [PolicyController::class, 'update'])->name('policies.update');
+Route::delete('/policies/{policy}', [PolicyController::class, 'destroy'])->name('policies.destroy');
