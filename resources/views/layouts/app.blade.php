@@ -43,12 +43,12 @@
                         {{-- <script type="text/javascript">
                             window.location.href = "{{ route('/') }}";
                         </script> --}}
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                            </li>
-                        @else
-                            @if(Auth::user()->role === 'Admin')
-                            <!-- Customers Link -->
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                        </li>
+                    @else
+                        @if(Auth::user()->role === 'Admin')
+                            <!-- Admin Role -->
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('home') }}">Home</a>
                             </li>
@@ -59,52 +59,52 @@
                                 <a class="nav-link" href="{{ route('customer.viewAll') }}">Customers</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link"  href="{{ route('policies.index') }}" >Policies</a>
+                                <a class="nav-link" href="{{ route('policies.index') }}">Policies</a>
                             </li>
                         @endif
-            
-                    <!-- Agent Role -->
-                    @if(Auth::user()->role === 'Agent')
-                        <!-- Customers Link -->
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('home') }}">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('customer.viewAll') }}">Customers</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('home') }}">Policies</a>
-                        </li>
-                    @endif
-            
-                    <!-- Customer Role -->
-                    @if(Auth::user()->role === 'Customer')
-                        <!-- Policies Link -->
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('home') }}">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link"  href="{{ route('home') }}">Policies</a>
-                        </li>
-                    @endif
-                            <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }} <span class="caret"></span>
-                                </a>
-
-                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
-                                    </a>
-
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                        @csrf
-                                    </form>
-                                </div>
+                    
+                        <!-- Agent Role -->
+                        @if(Auth::user()->role === 'Agent')
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('home') }}">Home</a>
                             </li>
-                        @endguest
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('customer.viewAll') }}">Customers</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('policies.index') }}">Policies</a>
+                            </li>
+                        @endif
+                    
+                        <!-- Customer Role -->
+                        @if(Auth::user()->role === 'Customer')
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('home') }}">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('policies.index') }}">Policies</a>
+                            </li>
+                        @endif
+                    
+                        <li class="nav-item dropdown">
+                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                {{ Auth::user()->name }} <span class="caret"></span>
+                            </a>
+                    
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="{{ route('logout') }}"
+                                    onclick="event.preventDefault();
+                                                document.getElementById('logout-form').submit();">
+                                    {{ __('Logout') }}
+                                </a>
+                    
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                    @csrf
+                                </form>
+                            </div>
+                        </li>
+                    @endguest
+                    
                     </ul>
                 </div>
             </div>

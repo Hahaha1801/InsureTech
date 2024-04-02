@@ -23,7 +23,17 @@
                                 @enderror
                             </div>
                         </div>
-
+                        <div class="form-group row">
+                            <label for="customer_id" class="col-md-4 col-form-label text-md-right">{{ __('Customer ID') }}</label>
+                            <div class="col-md-6">
+                                <select id="customer_id" name="customer_id" class="form-control" required>
+                                    <option value=""></option>
+                                    @foreach($customers as $customer)
+                                        <option value="{{ $customer->id }}">{{ $customer->id }} {{ $customer->name }} </option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
                         <div class="form-group row">
                             <label for="mobile_no" class="col-md-4 col-form-label text-md-right">{{ __('Mobile Number') }}</label>
                             <div class="col-md-6">

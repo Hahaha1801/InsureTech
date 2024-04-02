@@ -5,14 +5,25 @@ namespace App\Http\Controllers;
 use App\User;
 use App\Customer;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CustomerController extends Controller
 {
+    
     public function index()
     {
-        $customers = Customer::all(); // Fetch all customers from the database
+        // Check if the authenticated user is an admin
+        if (Auth::user()->id === 1 && Auth::user()->role === 'Admin') {
+            // If user is admin, fetch all customers
+            $customers = Customer::all();
+        } else {
+            // If user is not admin, fetch customers associated with the agent_id
+            $customers = Customer::where('agent_id', Auth::id())->get();
+        }
+
         return view('customer.viewAll', ['customers' => $customers]);
     }
+
     public function show(Customer $customer)
     {
         return view('customer.show', ['customer' => $customer]);
