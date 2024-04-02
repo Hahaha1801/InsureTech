@@ -8,7 +8,7 @@ class Customer extends Model
 {
     public function user()
     {
-        return $this->belongsTo(User::class, 'customer_id');
+        return $this->belongsTo(User::class, 'id');
     }
 }
 

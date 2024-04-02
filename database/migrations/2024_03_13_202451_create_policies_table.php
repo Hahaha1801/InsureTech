@@ -18,7 +18,6 @@ class CreatePoliciesTable extends Migration
             $table->string('c_name');
             $table->string('group');
             $table->string('address');
-            $table->unsignedBigInteger('refered_by');
             $table->string('mobile_no');
             $table->string('insurer_name');
             $table->string('p_type');

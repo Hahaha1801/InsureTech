@@ -2,6 +2,7 @@
 namespace App\Http\Controllers;
 
 use App\Policy;
+use App\Customer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -12,7 +13,7 @@ class PolicyController extends Controller
         if (Auth::user()->role === 'Admin') {
             $policies = Policy::all();
         } elseif (Auth::user()->role === 'Agent') {
-            $agentId = Auth::user()->agent_id;
+            $agentId = Auth::user()->id;
             $policies = Policy::where('refered_by', $agentId)->get();
         } else {
             abort(403, 'Unauthorized access');
@@ -21,10 +22,13 @@ class PolicyController extends Controller
         return view('policies.index', compact('policies'));
     }
 
-    public function create()
-    {
-        return view('policies.create');
-    }
+
+public function create()
+{
+    $customers = Customer::where('agent_id', auth()->user()->id)->get();
+    return view('policies.create', compact('customers'));
+}
+
 
     public function store(Request $request)
     {
@@ -34,7 +38,7 @@ class PolicyController extends Controller
         if ($user->role === 'Admin') {
             $referedBy = "1";
         } elseif ($user->role === 'Agent') {
-            $referedBy = $user->agent_id;
+            $referedBy = $user->id;
         }
 
         $data = $request->except('_token');
@@ -42,6 +46,7 @@ class PolicyController extends Controller
         Policy::create($data);
         return redirect()->route('policies.index');
     }    
+    
     public function show($p_number)
     {
         $policy = Policy::where('p_number', $p_number)->firstOrFail();

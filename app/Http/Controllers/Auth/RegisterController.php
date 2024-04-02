@@ -99,7 +99,7 @@ class RegisterController extends Controller
         ]);
         if ($data['role'] === 'Agent') {
             $agent = new Agent();
-            $agent->agent_id = $user->id;
+            $agent->id = $user->id;
             $agent->name = $data['name'];
             $agent->email = $data['email'];
             $agent->phone_no = $data['phone'];
@@ -108,11 +108,12 @@ class RegisterController extends Controller
         }
         elseif ($data['role'] === 'Customer') {
             $customer = new Customer();
-            $customer->customer_id = $user->id;
+            $customer->id = $user->id;
             $customer->name = $data['name'];
             $customer->email = $data['email'];
             $customer->phone_no = $data['phone'];
             $customer->address = $data['address'];
+            $customer->agent_id = auth()->user()->id;  
             $customer->save();
         }
         return $user;
