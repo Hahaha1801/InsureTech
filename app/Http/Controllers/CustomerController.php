@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\User;
 use App\Customer;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 
 class CustomerController extends Controller
@@ -12,12 +13,9 @@ class CustomerController extends Controller
     
     public function index()
     {
-        // Check if the authenticated user is an admin
         if (Auth::user()->id === 1 && Auth::user()->role === 'Admin') {
-            // If user is admin, fetch all customers
             $customers = Customer::all();
         } else {
-            // If user is not admin, fetch customers associated with the agent_id
             $customers = Customer::where('agent_id', Auth::id())->get();
         }
 
@@ -26,11 +24,15 @@ class CustomerController extends Controller
 
     public function show(Customer $customer)
     {
-        return view('customer.show', ['customer' => $customer]);
+        $customerId = $customer->id;
+        $policies = DB::table('policies')->where('customer_id', $customerId)->get();
+        
+        return view('customer.show', ['customer' => $customer, 'policies' => $policies]);
     }
+
     public function destroy(Customer $customer)
     {      
-        $user = User::where('id', $customer->customer_id)->first();
+        $user = User::where('id', $customer->id)->first();
 
         if (!$user) {
             return redirect()->route('customer.viewAll')->with('error', 'User not found');
@@ -41,5 +43,4 @@ class CustomerController extends Controller
         
         return redirect()->route('customer.viewAll')->with('success', 'Customer deleted successfully');
     }
-    
 }
