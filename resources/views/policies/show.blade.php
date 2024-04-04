@@ -15,16 +15,24 @@
                                 <td>{{ $policy->c_name }}</td>
                             </tr>
                             <tr>
+                                <th scope="row">Referred By</th>
+                                <td>
+                                    @php
+                                        $agentName = App\Agent::join('users', 'agents.id', '=', 'users.id')
+                                            ->where('agents.id', $policy->refered_by)
+                                            ->pluck('users.name')
+                                            ->first();
+                                    @endphp
+                                    {{ $agentName }}
+                                </td>
+                            </tr>
+                            <tr>
                                 <th scope="row">Group</th>
                                 <td>{{ $policy->group }}</td>
                             </tr>
                             <tr>
                                 <th scope="row">Address</th>
                                 <td>{{ $policy->address }}</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">Referred By</th>
-                                <td>{{ $policy->refered_by }}</td>
                             </tr>
                             <tr>
                                 <th scope="row">Mobile Number</th>
