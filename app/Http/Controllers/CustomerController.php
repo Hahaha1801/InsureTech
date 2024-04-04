@@ -26,7 +26,6 @@ class CustomerController extends Controller
     {
         $customerId = $customer->id;
         $policies = DB::table('policies')->where('customer_id', $customerId)->get();
-        
         return view('customer.show', ['customer' => $customer, 'policies' => $policies]);
     }
 

@@ -22,12 +22,17 @@ class PolicyController extends Controller
         return view('policies.index', compact('policies'));
     }
 
-
-public function create()
-{
-    $customers = Customer::where('agent_id', auth()->user()->id)->get();
-    return view('policies.create', compact('customers'));
-}
+    public function create()
+    {
+        if (Auth::user()->role === 'Admin') {
+            $customers = Customer::all();
+        } elseif (Auth::user()->role === 'Agent') {
+            $customers = Customer::where('agent_id', auth()->user()->id)->get();
+        } else {
+            abort(403, 'Unauthorized access');
+        }
+        return view('policies.create', compact('customers'));
+    }
 
 
     public function store(Request $request)
@@ -45,8 +50,9 @@ public function create()
         $data['refered_by'] = $referedBy;
         Policy::create($data);
         return redirect()->route('policies.index');
-    }    
-    
+    }
+
+
     public function show($p_number)
     {
         $policy = Policy::where('p_number', $p_number)->firstOrFail();
