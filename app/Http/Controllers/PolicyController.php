@@ -79,5 +79,23 @@ class PolicyController extends Controller
         $policy->delete();
         return redirect()->route('policies.index');
     }
+
+    public function uploadPdf(Request $request, $id)
+{
+    $policy = Policy::findOrFail($id);
+
+    // Validate the uploaded PDF file
+    $request->validate([
+        'pdf_file' => 'required|mimes:pdf',
+    ]);
+
+    // Store the uploaded PDF in the public/pdfs directory
+    $pdfPath = $request->file('pdf_file')->storeAs('public/pdfs', $policy->p_number . '.pdf');
+
+    
+
+    return redirect()->back()->with('success', 'Policy PDF uploaded successfully.');
+}
+
     
 }

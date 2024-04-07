@@ -65,3 +65,11 @@
     </div>
 </div>
 @endsection
+<script>
+    function confirmDelete(customerId) {
+        if (confirm('Are you sure you want to delete this customer?')) {
+            event.preventDefault();
+            document.getElementById('delete-form-' + customerId).submit();
+        }
+    }
+</script>

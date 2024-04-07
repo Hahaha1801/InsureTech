@@ -8,6 +8,23 @@
                 <div class="card-header">{{ __('Policy Details') }}</div>
 
                 <div class="card-body">
+                    @if (Storage::exists('public/pdfs/' . $policy->p_number . '.pdf'))
+                    <!-- If PDF exists, display a button to view PDF -->
+                    <a href="{{ asset('storage/pdfs/' . $policy->p_number . '.pdf') }}" class="btn btn-primary" target="_blank">View Policy PDF</a>
+                @else
+                    <!-- If PDF doesn't exist, display a form to upload PDF -->
+                    <form action="{{ route('policy.upload.pdf', ['id' => $policy->id]) }}" method="post" enctype="multipart/form-data">
+                        @csrf
+                        <div class="form-group">
+                            <label for="pdf_file">Upload Policy PDF</label>
+                            <input type="file" class="form-control-file" id="pdf_file" name="pdf_file" accept="application/pdf">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Upload PDF</button>
+                    </form>
+                @endif
+                
+                
+
                     <table class="table">
                         <tbody>
                             <tr>

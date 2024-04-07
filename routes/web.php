@@ -45,3 +45,5 @@ Route::get('/policies/{policy}', [PolicyController::class, 'show'])->name('polic
 Route::get('/policies/{policy}/edit', [PolicyController::class, 'edit'])->name('policies.edit');
 Route::put('/policies/{policy}', [PolicyController::class, 'update'])->name('policies.update');
 Route::delete('/policies/{policy}', [PolicyController::class, 'destroy'])->name('policies.destroy');
+
+Route::post('/policy/{id}/upload-pdf', [PolicyController::class, 'uploadPdf'])->name('policy.upload.pdf');
