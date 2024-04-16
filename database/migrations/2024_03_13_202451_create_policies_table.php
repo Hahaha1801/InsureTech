@@ -22,7 +22,7 @@ class CreatePoliciesTable extends Migration
             $table->string('insurer_name');
             $table->string('p_type');
             $table->string('p_name');
-            $table->integer('p_number');
+            $table->string('p_number')->unique();
             $table->date('start_date');
             $table->date('end_date');
             $table->integer('sub_ins');

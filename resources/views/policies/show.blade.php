@@ -9,22 +9,20 @@
 
                 <div class="card-body">
                     @if (Storage::exists('public/pdfs/' . $policy->p_number . '.pdf'))
-                    <!-- If PDF exists, display a button to view PDF -->
-                    <a href="{{ asset('storage/pdfs/' . $policy->p_number . '.pdf') }}" class="btn btn-primary" target="_blank">View Policy PDF</a>
-                @else
-                    <!-- If PDF doesn't exist, display a form to upload PDF -->
-                    <form action="{{ route('policy.upload.pdf', ['id' => $policy->id]) }}" method="post" enctype="multipart/form-data">
-                        @csrf
-                        <div class="form-group">
-                            <label for="pdf_file">Upload Policy PDF</label>
-                            <input type="file" class="form-control-file" id="pdf_file" name="pdf_file" accept="application/pdf">
-                        </div>
-                        <button type="submit" class="btn btn-primary">Upload PDF</button>
-                    </form>
-                @endif
-                
-                
-
+                        <a href="{{ asset('storage/pdfs/' . $policy->p_number . '.pdf') }}" class="btn btn-primary" target="_blank">View Policy PDF</a>
+                    @else
+                        @if (Auth::check() && Auth::user()->role !== 'Customer')
+                            <form action="{{ route('policy.upload.pdf', ['id' => $policy->id]) }}" method="post" enctype="multipart/form-data">
+                                @csrf
+                                <div class="form-group">
+                                    <label for="pdf_file">Upload Policy PDF</label>
+                                    <input type="file" class="form-control-file" id="pdf_file" name="pdf_file" accept="application/pdf">
+                                </div>
+                                <button type="submit" class="btn btn-primary">Upload PDF</button>
+                            </form>
+                        @endif
+                    @endif
+                    
                     <table class="table">
                         <tbody>
                             <tr>
@@ -133,6 +131,20 @@
                             </tr>
                         </tbody>
                     </table>
+                    @if (!$hasClaim)
+                        <div class="mt-3">
+                            <form action="{{ route('claims.store') }}" method="POST">
+                                @csrf
+                                <input type="hidden" name="p_number" value="{{ $policy->p_number }}">
+                                <div class="form-group">
+                                    <label for="description">Description (Optional)</label>
+                                    <textarea class="form-control" id="description" name="description" rows="3"></textarea>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Request Claim</button>
+                            </form>
+                        </div>
+                    @endif
+
                 </div>
             </div>
         </div>

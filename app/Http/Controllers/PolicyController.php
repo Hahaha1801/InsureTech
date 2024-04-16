@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers;
 
+use App\Claim;
 use App\Policy;
 use App\Customer;
 use Illuminate\Http\Request;
@@ -14,7 +15,12 @@ class PolicyController extends Controller
             $policies = Policy::all();
         } elseif (Auth::user()->role === 'Agent') {
             $agentId = Auth::user()->id;
-            $policies = Policy::where('refered_by', $agentId)->get();
+            $customers = Customer::where('agent_id', Auth::id())->get();
+            $customerIds = $customers->pluck('id')->toArray();
+            $policies = Policy::whereIn('customer_id', $customerIds)->get();
+        } elseif (Auth::user()->role === 'Customer') {
+            $customerId = Auth::user()->id;
+            $policies = Policy::where('customer_id', $customerId)->get();
         } else {
             abort(403, 'Unauthorized access');
         }
@@ -56,7 +62,9 @@ class PolicyController extends Controller
     public function show($p_number)
     {
         $policy = Policy::where('p_number', $p_number)->firstOrFail();
-        return view('policies.show', compact('policy'));
+        $hasClaim = Claim::where('p_number', $p_number)->exists();
+        
+        return view('policies.show', compact('policy', 'hasClaim'));
     }
     
 

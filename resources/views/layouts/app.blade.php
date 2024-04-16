@@ -59,6 +59,9 @@
                                 <a class="nav-link" href="{{ route('customer.viewAll') }}">Customers</a>
                             </li>
                             <li class="nav-item">
+                                <a class="nav-link" href="{{ route('claims.index') }}">Claims</a>
+                            </li>
+                            <li class="nav-item">
                                 <a class="nav-link" href="{{ route('policies.index') }}">Policies</a>
                             </li>
                         @endif
@@ -70,6 +73,9 @@
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('customer.viewAll') }}">Customers</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('claims.index') }}">Claims</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('policies.index') }}">Policies</a>

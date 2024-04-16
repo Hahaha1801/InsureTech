@@ -2,11 +2,14 @@
 
 @section('content')
 <div class="container">
+    @if (Auth::check() && Auth::user()->role !== 'Customer')
     <div class="row justify-content-center mb-3">
         <div class="col-md-10">
             <a href="{{ route('policies.create') }}" class="btn btn-primary">New Policy</a>
         </div>
     </div>
+    @endif
+
     <div class="row justify-content-center">
         <div class="col-md-10">
             <div class="card">
