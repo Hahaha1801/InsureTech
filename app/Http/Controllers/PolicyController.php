@@ -63,11 +63,9 @@ class PolicyController extends Controller
     {
         $policy = Policy::where('p_number', $p_number)->firstOrFail();
         $hasClaim = Claim::where('p_number', $p_number)->exists();
-        
-        return view('policies.show', compact('policy', 'hasClaim'));
+        $claimStatus = Claim::where('p_number', $p_number)->value('status');
+        return view('policies.show', compact('policy', 'hasClaim', 'claimStatus'));
     }
-    
-
     public function edit($id)
     {
         $policy = Policy::findOrFail($id);
@@ -89,21 +87,18 @@ class PolicyController extends Controller
     }
 
     public function uploadPdf(Request $request, $id)
-{
-    $policy = Policy::findOrFail($id);
+    {
+        $policy = Policy::findOrFail($id);
 
-    // Validate the uploaded PDF file
-    $request->validate([
-        'pdf_file' => 'required|mimes:pdf',
-    ]);
+        // Validate the uploaded PDF file
+        $request->validate([
+            'pdf_file' => 'required|mimes:pdf',
+        ]);
 
-    // Store the uploaded PDF in the public/pdfs directory
-    $pdfPath = $request->file('pdf_file')->storeAs('public/pdfs', $policy->p_number . '.pdf');
+        $pdfPath = $request->file('pdf_file')->storeAs('public/pdfs', $policy->p_number . '.pdf');
 
-    
-
-    return redirect()->back()->with('success', 'Policy PDF uploaded successfully.');
-}
+        return redirect()->back()->with('success', 'Policy PDF uploaded successfully.');
+    }
 
     
 }

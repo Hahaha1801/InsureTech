@@ -3,16 +3,17 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center mb-3">
-        <div class="col-md-8">
+        <div class="col-md-10">
             <a href="{{ route('register', ['role' => 'agent']) }}" class="btn btn-primary">New Agent</a>
         </div>
     </div>
     <div class="row justify-content-center">
-        <div class="col-md-8">
+        <div class="col-md-10">
             <div class="card">
                 <div class="card-header">Agents</div>
 
                 <div class="card-body">
+                    <div class="table-responsive">
                     <table class="table">
                         <thead>
                             <tr>
@@ -40,6 +41,7 @@
                             @endforeach
                         </tbody>
                     </table>
+                    </div>
                 </div>
             </div>
         </div>

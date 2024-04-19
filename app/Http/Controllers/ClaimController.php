@@ -10,25 +10,6 @@ use Illuminate\Support\Facades\Auth;
 class ClaimController extends Controller
 {
 
-    //  public function index()
-    // {
-    //     if (Auth::user()->role === 'Admin') {
-    //         $claims = Claim::with('policy')->get();
-        
-    //     return view('claims.index', compact('claims'));
-    //     } elseif (Auth::user()->role === 'Agent') {
-    //         // $agentId = Auth::user()->id;
-    //         // $policies = Policy::where('refered_by', $agentId)->get();
-    //     } elseif (Auth::user()->role === 'Customer') {
-    //         // $customerId = Auth::user()->id;
-    //         // $policies = Policy::where('customer_id', $customerId)->get();
-    //     } else {
-    //         abort(403, 'Unauthorized access');
-    //     }
-
-    //     return view('policies.index', compact('policies'));
-    //}
-
     public function index()
     {
         if (Auth::user()->role === 'Admin') {
@@ -64,4 +45,22 @@ class ClaimController extends Controller
 
         return redirect()->back()->with('success', 'Claim requested successfully!');
     }
+
+    public function updateStatus(Request $request)
+    {
+        $p_number = $request->input('p_number');
+        $newStatus = $request->input('status');
+    
+        $claim = Claim::where('p_number', $p_number)->first();
+    
+        if ($claim) {
+            $claim->status = $newStatus;
+            $claim->save();
+            return response()->json(['success' => true]);
+        } else {
+            return response()->json(['success' => false, 'message' => 'Claim not found']);
+        }
+    }
+    
+
 }

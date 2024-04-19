@@ -34,9 +34,6 @@ Route::get('/agents', [AgentController::class, 'index'])->name('agent.viewAll');
 Route::get('/agent/{agent}', [AgentController::class, 'show'])->name('agent.show');
 Route::delete('/agent/{agent}', [AgentController::class, 'destroy'])->name('agent.destroy');
 
-// Route::get('/policies/create', [PolicyController::class, 'index'])->name('policy.createPolicy');
-// Route::post('/policies', [PolicyController::class, 'store'])->name('policies.store');
-
 Route::get('/policies', [PolicyController::class, 'index'])->name('policies.index');
 Route::get('/policies/create', [PolicyController::class, 'create'])->name('policies.create');
 Route::post('/policies', [PolicyController::class, 'store'])->name('policies.store');
@@ -48,3 +45,4 @@ Route::post('/policy/{id}/upload-pdf', [PolicyController::class, 'uploadPdf'])->
 
 Route::post('/claims/create',[ClaimController::class, 'store'])->name('claims.store');
 Route::get('/claims', [ClaimController::class, 'index'])->name('claims.index');
+Route::post('/update-claim-status', 'ClaimController@updateStatus')->name('claim.updateStatus');

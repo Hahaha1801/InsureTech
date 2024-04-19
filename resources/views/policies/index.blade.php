@@ -16,42 +16,44 @@
                 <div class="card-header">{{ __('Policies') }}</div>
 
                 <div class="card-body">
-                    @if (count($policies) > 0)
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th>Customer Name</th>
-                                    <th>Group</th>
-                                    <th>Policy Name</th>
-                                    <th>Policy Number</th>
-                                    <th>Start Date</th>
-                                    <th>Actions</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach ($policies as $policy)
+                    <div class="table-responsive">
+                        @if (count($policies) > 0)
+                            <table class="table">
+                                <thead>
                                     <tr>
-                                        <td>{{ $policy->c_name }}</td>
-                                        <td>{{ $policy->group }}</td>
-                                        <td>{{ $policy->p_name }}</td>
-                                        <td>{{ $policy->p_number }}</td>
-                                        <td>{{ $policy->start_date }}</td>
-                                        <td>
-                                            <a href="{{ route('policies.show', $policy->p_number) }}" class="btn btn-primary">View</a>
-                                            <form id="delete-form-{{ $policy->p_number }}" action="{{ route('policies.destroy', $policy->p_number) }}" method="POST" style="display: none;">
-                                                @csrf
-                                                @method('DELETE')
-                                            </form>
-                                        
-                                            <button type="button" class="btn btn-danger" onclick="confirmDelete({{ $policy->p_number}})">Delete</button>
-                                        </td>
+                                        <th>Customer Name</th>
+                                        <th>Group</th>
+                                        <th>Policy Name</th>
+                                        <th>Policy Number</th>
+                                        <th>Start Date</th>
+                                        <th>Actions</th>
                                     </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
-                    @else
-                        <p>No policies found.</p>
-                    @endif
+                                </thead>
+                                <tbody>
+                                    @foreach ($policies as $policy)
+                                        <tr>
+                                            <td>{{ $policy->c_name }}</td>
+                                            <td>{{ $policy->group }}</td>
+                                            <td>{{ $policy->p_name }}</td>
+                                            <td>{{ $policy->p_number }}</td>
+                                            <td>{{ $policy->start_date }}</td>
+                                            <td>
+                                                <a href="{{ route('policies.show', $policy->p_number) }}" class="btn btn-primary">View</a>
+                                                <form id="delete-form-{{ $policy->p_number }}" action="{{ route('policies.destroy', $policy->p_number) }}" method="POST" style="display: none;">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                </form>
+                                            
+                                                <button type="button" class="btn btn-danger" onclick="confirmDelete({{ $policy->p_number}})">Delete</button>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        @else
+                            <p>No policies found.</p>
+                        @endif
+                    </div>
                 </div>
             </div>
         </div>
