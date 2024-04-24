@@ -1,3 +1,7 @@
+@php
+    $dropdownOptions = config('dropdownOptions');
+@endphp
+
 @extends('layouts.app')
 
 @section('content')
@@ -62,10 +66,15 @@
                         <div class="form-group row">
                             <label for="group" class="col-md-4 col-form-label text-md-right">{{ __('Group') }}</label>
                             <div class="col-md-6">
-                                <select id="group" name="group" class="form-control" required>
-                                    <option value=""></option>
-                                    <option value="Individual">Individual</option>
-                                    <option value="Family">Family</option>
+                                <select class="form-select" aria-label="Group Dropdown">
+                                    <option selected>Select Group</option>
+                                    @if (isset($dropdownOptions['groups']) && !empty($dropdownOptions['groups']))
+                                        @foreach ($dropdownOptions['groups'] as $group)
+                                            <option value="{{ $group }}">{{ $group }}</option>
+                                        @endforeach
+                                    @else
+                                        <option disabled>No Groups Available</option>
+                                    @endif
                                 </select>
                             </div>
                         </div>

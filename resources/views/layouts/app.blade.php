@@ -21,37 +21,54 @@
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
-            <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
-                </a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
+    <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+        <div class="container">
+            <a class="navbar-brand" href="{{ url('/') }}">
+                {{ config('app.name', 'Laravel') }}
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
+                <span class="navbar-toggler-icon"></span>
+            </button>
 
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav mr-auto">
-
-                    </ul>
-
-                    <!-- Right Side Of Navbar -->
-                    <ul class="navbar-nav ml-auto">
-                        <!-- Authentication Links -->
-                        @guest
-                        {{-- <script type="text/javascript">
-                            window.location.href = "{{ route('/') }}";
-                        </script> --}}
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                        <li class="nav-item dropdown">
+                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                Masters <span class="caret"></span>
+                            </a>
+                        
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                {{-- <form action="{{ route('masters.group') }}" method="POST">
+                                    @csrf <button type="submit" class="dropdown-item">Group Master</button>
+                                </form> --}}
+                                        <a class="dropdown-item" href="{{ route('register', ['role' => 'agent']) }}">Agent Master</a>
+                                        <a class="dropdown-item" href="{{ route('register', ['role' => 'customer']) }}">Customer Master</a>
+                                        <a class="dropdown-item" href="{{ route('masters.group') }}">Group Master</a>
+                                        <a class="dropdown-item" href="#">Insurance Master</a>
+                                        <a class="dropdown-item" href="#">Policy Master</a>
+                                        <a class="dropdown-item" href="#">Policy Type Master</a>
+                                        <a class="dropdown-item" href="#">Bank Master</a>
+                                  
+                            </div>
+                            
                         </li>
+                    {{-- @endif --}}
+                </ul>
+
+                <ul class="navbar-nav ml-auto">
+                    <!-- Authentication Links -->
+                    @guest
+                    {{-- <script type="text/javascript">
+                        window.location.href = "{{ route('/') }}";
+                    </script> --}}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                    </li>
                     @else
                         @if(Auth::user()->role === 'Admin')
                             <!-- Admin Role -->
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('home') }}">Home</a>
-                            </li>
+                                <a class="nav-link" href="{{ route('home') }}">Home</a>                           
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('agent.viewAll') }}">Agents</a>
                             </li>
@@ -110,15 +127,13 @@
                             </div>
                         </li>
                     @endguest
-                    
-                    </ul>
-                </div>
+                </ul>
             </div>
-        </nav>
+        </div>
+    </nav>
 
-        <main class="py-4">
-            @yield('content')
-        </main>
-    </div>
-</body>
-</html>
+    <main class="py-4">
+        @yield('content')
+    </main>
+</div>
+</body></html>
