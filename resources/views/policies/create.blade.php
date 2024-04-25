@@ -66,8 +66,8 @@
                         <div class="form-group row">
                             <label for="group" class="col-md-4 col-form-label text-md-right">{{ __('Group') }}</label>
                             <div class="col-md-6">
-                                <select class="form-select" aria-label="Group Dropdown">
-                                    <option selected>Select Group</option>
+                                <select id="group" name="group" class="form-control" required>
+                                    <option value=""></option>
                                     @if (isset($dropdownOptions['groups']) && !empty($dropdownOptions['groups']))
                                         @foreach ($dropdownOptions['groups'] as $group)
                                             <option value="{{ $group }}">{{ $group }}</option>
@@ -79,13 +79,19 @@
                             </div>
                         </div>
 
+                                                
                         <div class="form-group row">
                             <label for="insurer_name" class="col-md-4 col-form-label text-md-right">{{ __('Insurer Name') }}</label>
                             <div class="col-md-6">
                                 <select id="insurer_name" name="insurer_name" class="form-control" required>
                                     <option value=""></option>
-                                    <option value="Star Health">Star Health</option>
-                                    <option value="Godigit">Godigit</option>
+                                    @if (isset($dropdownOptions['insuranceCompanies']) && !empty($dropdownOptions['insuranceCompanies']))
+                                        @foreach ($dropdownOptions['insuranceCompanies'] as $company)
+                                            <option value="{{ $company }}">{{ $company }}</option>
+                                        @endforeach
+                                    @else
+                                        <option disabled>No Insurer Names Available</option>
+                                    @endif
                                 </select>
                             </div>
                         </div>
@@ -95,22 +101,29 @@
                             <div class="col-md-6">
                                 <select id="p_type" name="p_type" class="form-control" required>
                                     <option value=""></option>
-                                    <option value="health">Health</option>
-                                    <option value="motor">Motor</option>
+                                    @if (isset($dropdownOptions['policyTypes']) && !empty($dropdownOptions['policyTypes']))
+                                        @foreach ($dropdownOptions['policyTypes'] as $type)
+                                            <option value="{{ $type }}">{{ $type }}</option>
+                                        @endforeach
+                                    @else
+                                        <option disabled>No Policy Types Available</option>
+                                    @endif
                                 </select>
                             </div>
                         </div>
-
-
                         <div class="form-group row">
                             <label for="p_name" class="col-md-4 col-form-label text-md-right">{{ __('Policy Name') }}</label>
                             <div class="col-md-6">
-                                <input id="p_name" type="text" class="form-control @error('p_name') is-invalid @enderror" name="p_name" value="{{ old('p_name') }}" required autocomplete="p_name">
-                                @error('Pname')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
+                                <select id="p_name" name="p_name" class="form-control" required>
+                                    <option value=""></option>
+                                    @if (isset($dropdownOptions['policy']) && !empty($dropdownOptions['policy']))
+                                        @foreach ($dropdownOptions['policy'] as $policy)
+                                            <option value="{{ $policy }}">{{ $policy }}</option>
+                                        @endforeach
+                                    @else
+                                        <option disabled>No Policies Available</option>
+                                    @endif
+                                </select>
                             </div>
                         </div>
 

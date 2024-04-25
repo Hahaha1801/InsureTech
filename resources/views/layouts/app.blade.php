@@ -41,14 +41,12 @@
                                 {{-- <form action="{{ route('masters.group') }}" method="POST">
                                     @csrf <button type="submit" class="dropdown-item">Group Master</button>
                                 </form> --}}
-                                        <a class="dropdown-item" href="{{ route('register', ['role' => 'agent']) }}">Agent Master</a>
-                                        <a class="dropdown-item" href="{{ route('register', ['role' => 'customer']) }}">Customer Master</a>
-                                        <a class="dropdown-item" href="{{ route('masters.group') }}">Group Master</a>
-                                        <a class="dropdown-item" href="#">Insurance Master</a>
-                                        <a class="dropdown-item" href="#">Policy Master</a>
-                                        <a class="dropdown-item" href="#">Policy Type Master</a>
-                                        <a class="dropdown-item" href="#">Bank Master</a>
-                                  
+                                <a class="dropdown-item" href="{{ route('masters.index', ['option' => 'groups']) }}">Group Master</a>
+                                <a class="dropdown-item" href="{{ route('masters.index', ['option' => 'insuranceCompanies']) }}">Insurance Company Master</a>
+                                <a class="dropdown-item" href="{{ route('masters.index', ['option' => 'policy']) }}">Policy Master</a>
+                                <a class="dropdown-item" href="{{ route('masters.index', ['option' => 'policyTypes']) }}">Policy Type Master</a>
+                                <a class="dropdown-item" href="{{ route('masters.index', ['option' => 'banks']) }}">Bank Master</a>
+                                
                             </div>
                             
                         </li>

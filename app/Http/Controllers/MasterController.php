@@ -9,38 +9,35 @@ use Illuminate\Support\Facades\Artisan;
 
 class MasterController extends Controller
 {
-    public function group()
+    public function index($option)
     {
-        return view('masters.group');
+        if (!array_key_exists($option, config('dropdownOptions'))) {
+            abort(404);
+        }
+
+        return view('masters.' . $option, compact('option'));
     }
 
-    public function store(Request $request)
+
+    public function store(Request $request, $option)
     {
-        $groupName = $request->input('group_name');
-
-        // Retrieve existing groups from config file
-        $groups = Config::get('dropdownOptions.groups', []);
-
-        // Check if the group name already exists
-        if (in_array($groupName, $groups)) {
-            // Handle duplicate group name error here
-            return redirect()->back()->withErrors(['group_name' => 'The group name already exists.'])->withInput();
+        if (!array_key_exists($option, config('dropdownOptions'))) {
+            abort(404);
         }
+
+        $masterName = $request->input('master_name');
+        $masters = Config::get('dropdownOptions.' . $option, []);
+
+        if (in_array($masterName, $masters)) {
+            return redirect()->back()->withErrors(['master_name' => 'The master name already exists.'])->withInput();
+        }
+
         $configPath = config_path('dropdownOptions.php');
-        // Retrieve existing options from config file
-$options = include(config_path('dropdownOptions.php'));
-
-// Add the new group to the 'groups' array
-$options['groups'][] = $groupName;
-
-// Update the config file with the new options
-File::put($configPath, '<?php return ' . var_export($options, true) . ';');
-
-
-        // Clear the cached config to reflect changes
+        $options = include($configPath);
+        $options[$option][] = $masterName;
+        File::put($configPath, '<?php return ' . var_export($options, true) . ';');
         Artisan::call('config:clear');
 
         return redirect()->route('policies.index');
     }
-
 }

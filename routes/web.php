@@ -48,14 +48,5 @@ Route::post('/claims/create',[ClaimController::class, 'store'])->name('claims.st
 Route::get('/claims', [ClaimController::class, 'index'])->name('claims.index');
 Route::post('/update-claim-status', 'ClaimController@updateStatus')->name('claim.updateStatus');
 
-Route::get('/groups', [MasterController::class, 'group'])->name('masters.group');
-Route::post('/home', [MasterController::class, 'store'])->name('masters.store');
-// Route::post('/add-group-option', function (Request $request) {
-//     $request->validate([
-//         'new_group' => 'required|string|max:255|unique:dropdown_options->groups', // Ensure unique group names
-//     ]);
-
-//     $newGroup = $request->new_group;
-
-//     return redirect()->route('add.group.option')->with('success', 'Group option added successfully!');
-// })->name('add.group.option'); 
+Route::get('/masters/{option}', [MasterController::class, 'index'])->name('masters.index');
+Route::post('/masters/{option}', [MasterController::class, 'store'])->name('masters.store');
