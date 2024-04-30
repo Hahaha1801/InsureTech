@@ -11,7 +11,7 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
-
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>   
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
@@ -32,24 +32,7 @@
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
-                        <li class="nav-item dropdown">
-                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                Masters <span class="caret"></span>
-                            </a>
-                        
-                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                {{-- <form action="{{ route('masters.group') }}" method="POST">
-                                    @csrf <button type="submit" class="dropdown-item">Group Master</button>
-                                </form> --}}
-                                <a class="dropdown-item" href="{{ route('masters.index', ['option' => 'groups']) }}">Group Master</a>
-                                <a class="dropdown-item" href="{{ route('masters.index', ['option' => 'insuranceCompanies']) }}">Insurance Company Master</a>
-                                <a class="dropdown-item" href="{{ route('masters.index', ['option' => 'policy']) }}">Policy Master</a>
-                                <a class="dropdown-item" href="{{ route('masters.index', ['option' => 'policyTypes']) }}">Policy Type Master</a>
-                                <a class="dropdown-item" href="{{ route('masters.index', ['option' => 'banks']) }}">Bank Master</a>
-                                
-                            </div>
-                            
-                        </li>
+                       
                     {{-- @endif --}}
                 </ul>
 
@@ -78,6 +61,24 @@
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('policies.index') }}">Policies</a>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                    Masters <span class="caret"></span>
+                                </a>
+                            
+                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                    {{-- <form action="{{ route('masters.group') }}" method="POST">
+                                        @csrf <button type="submit" class="dropdown-item">Group Master</button>
+                                    </form> --}}
+                                    <a class="dropdown-item" href="{{ route('masters.index', ['option' => 'groups']) }}">Group Master</a>
+                                    <a class="dropdown-item" href="{{ route('masters.index', ['option' => 'insuranceCompanies']) }}">Insurance Company Master</a>
+                                    <a class="dropdown-item" href="{{ route('masters.index', ['option' => 'policy']) }}">Policy Master</a>
+                                    <a class="dropdown-item" href="{{ route('masters.index', ['option' => 'policyTypes']) }}">Policy Type Master</a>
+                                    <a class="dropdown-item" href="{{ route('masters.index', ['option' => 'banks']) }}">Bank Master</a>
+                                    
+                                </div>
+                                
                             </li>
                         @endif
                     

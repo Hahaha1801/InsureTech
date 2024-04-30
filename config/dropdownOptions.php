@@ -11,11 +11,8 @@
   'policyTypes' => 
   array (
     0 => 'Health',
-    1 => 'Life',
-    2 => 'Auto',
-    3 => 'Home',
-    4 => 'Travel',
-    5 => 'Bike Insurance',
+    1 => 'Motor',
+    2 => 'Fire',
   ),
   'banks' => 
   array (

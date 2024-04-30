@@ -9,6 +9,11 @@ use Illuminate\Support\Facades\Artisan;
 
 class MasterController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index($option)
     {
         if (!array_key_exists($option, config('dropdownOptions'))) {
@@ -17,7 +22,6 @@ class MasterController extends Controller
 
         return view('masters.' . $option, compact('option'));
     }
-
 
     public function store(Request $request, $option)
     {
