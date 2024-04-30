@@ -379,8 +379,8 @@
             $('#tp_motor, #terr, #eq, #other, #stfi').prop('readonly', false);
 
             if (policyType === 'Motor') {
-                $('#eq, #stfi').val(0);
-                $('#eq, #stfi').prop('readonly', true); // Disable EQ and STFI for Motor policy
+                $('#eq, #stfi,#terr').val(0);
+                $('#eq, #stfi,#terr').prop('readonly', true); // Disable EQ and STFI for Motor policy
             } else if (policyType === 'Health') {
                 $('#tp_motor, #terr, #eq, #stfi').val(0);
                 $('#tp_motor, #terr, #eq, #stfi').prop('readonly', true); // Disable TP Motor, TERR, EQ, and STFI for Health policy
