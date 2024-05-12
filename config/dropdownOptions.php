@@ -26,7 +26,9 @@
   ),
   'policy' => 
   array (
-    0 => 'Optima Secure',
-    1 => 'Reliance Nippon Cancer Protection Plan',
+      0 => 'Optima Secure, 10',
+      1 => 'Reliance Nippon Cancer Protection Plan, 12',
+      2 => 'SecureLife, 15',
+      3 => 'LifeInsure, 13',
   ),
 );

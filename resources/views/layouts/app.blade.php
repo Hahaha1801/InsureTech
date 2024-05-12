@@ -71,6 +71,8 @@
                                     {{-- <form action="{{ route('masters.group') }}" method="POST">
                                         @csrf <button type="submit" class="dropdown-item">Group Master</button>
                                     </form> --}}
+                                    <a class="dropdown-item" href="{{ route('register', ['role' => 'agent']) }}">Agent Master</a>
+                                    <a class="dropdown-item" href="{{ route('register', ['role' => 'customer']) }}">Customer Master</a>
                                     <a class="dropdown-item" href="{{ route('masters.index', ['option' => 'groups']) }}">Group Master</a>
                                     <a class="dropdown-item" href="{{ route('masters.index', ['option' => 'insuranceCompanies']) }}">Insurance Company Master</a>
                                     <a class="dropdown-item" href="{{ route('masters.index', ['option' => 'policy']) }}">Policy Master</a>

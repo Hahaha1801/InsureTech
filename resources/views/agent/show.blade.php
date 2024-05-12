@@ -24,6 +24,10 @@
                         <div class="col-md-4">Address:</div>
                         <div class="col-md-8">{{ $agent->address }}</div>
                     </div>
+                    <div class="row">
+                        <div class="col-md-4">Brokerage Rate:</div>
+                        <div class="col-md-8">{{ $agent->brokerage_rate }}</div>
+                    </div>
                 </div>
             </div>
 

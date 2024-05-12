@@ -6,6 +6,7 @@ use App\Policy;
 use App\Customer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Config;
 
 class PolicyController extends Controller
 {
@@ -45,7 +46,6 @@ class PolicyController extends Controller
         return view('policies.create', compact('customers'));
     }
 
-
     public function store(Request $request)
     {
         $user = Auth::user();
@@ -59,6 +59,27 @@ class PolicyController extends Controller
 
         $data = $request->except('_token');
         $data['refered_by'] = $referedBy;
+        
+        // Fetch policy brokerage rates from config
+        $policyBrokerageRates = Config::get('dropdownOptions.policy');
+        $data['companyBrokerage'] = 0.00;
+
+        // Loop through the policy brokerage rates
+        foreach ($policyBrokerageRates as $policyRate) {
+            // Split policy name and brokerage rate
+            list($policyName, $brokerageRate) = explode(', ', $policyRate);
+
+            // Check if the policy name matches the one in the request
+            if ($data['p_name'] == $policyName) {
+                $brokerageAmount = $data['total'] * (float)$brokerageRate / 100;
+
+                $data['companyBrokerage'] = $brokerageAmount;
+                
+                // Break the loop as we found the matching policy
+                break;
+            }
+        }
+        
         Policy::create($data);
         return redirect()->route('policies.index');
     }

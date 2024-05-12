@@ -119,7 +119,11 @@
                                         <option value=""></option>
                                         @if (isset($dropdownOptions['policy']) && !empty($dropdownOptions['policy']))
                                             @foreach ($dropdownOptions['policy'] as $policy)
-                                                <option value="{{ $policy }}">{{ $policy }}</option>
+                                                @php
+                                                    // Extract policy name
+                                                    $policyName = explode(', ', $policy)[0];
+                                                @endphp
+                                                <option value="{{ $policyName }}">{{ $policyName }}</option>
                                             @endforeach
                                         @else
                                             <option disabled>No Policies Available</option>
@@ -127,6 +131,7 @@
                                     </select>
                                 </div>
                             </div>
+                            
 
                             <div class="form-group row">
                                 <label for="p_number" class="col-md-4 col-form-label text-md-right">{{ __('Policy Number') }}</label>
@@ -359,9 +364,8 @@
     $(document).ready(function() {
         // Set default values for fields
         $('#tp_motor, #basic, #terr, #eq, #other, #stfi').val(0);
-        $('#gst, #total').prop('readonly', true); // Make GST and Total uneditable by default
+        $('#gst, #total').prop('readonly', true); 
 
-        // Calculate total dynamically based on policy type and relevant fields
         $('#p_type, #basic, #tp_motor, #terr, #eq, #other, #stfi').change(function() {
             var policyType = $('#p_type').val();
             disableUnrelatedFields(policyType); // Disable unrelated fields
@@ -374,23 +378,21 @@
             }
         });
 
-        // Function to disable unrelated fields based on policy type
         function disableUnrelatedFields(policyType) {
             $('#tp_motor, #terr, #eq, #other, #stfi').prop('readonly', false);
 
             if (policyType === 'Motor') {
                 $('#eq, #stfi,#terr').val(0);
-                $('#eq, #stfi,#terr').prop('readonly', true); // Disable EQ and STFI for Motor policy
+                $('#eq, #stfi,#terr').prop('readonly', true); 
             } else if (policyType === 'Health') {
                 $('#tp_motor, #terr, #eq, #stfi').val(0);
-                $('#tp_motor, #terr, #eq, #stfi').prop('readonly', true); // Disable TP Motor, TERR, EQ, and STFI for Health policy
+                $('#tp_motor, #terr, #eq, #stfi').prop('readonly', true); 
             } else if (policyType === 'Fire') {
                 $('#tp_motor').val(0);
-                $('#tp_motor').prop('readonly', true); // Disable TP Motor for Fire policy
+                $('#tp_motor').prop('readonly', true);
             }
         }
 
-        // Function to calculate total for motor policy type
         function calculateMotorTotal() {
             var basic = parseFloat($('#basic').val()) || 0;
             var tpMotor = parseFloat($('#tp_motor').val()) || 0;
@@ -401,7 +403,6 @@
             $('#total').val(total.toFixed(2));
         }
 
-        // Function to calculate total for health policy type
         function calculateHealthTotal() {
             var basic = parseFloat($('#basic').val()) || 0;
             var other = parseFloat($('#other').val()) || 0;
@@ -411,7 +412,6 @@
             $('#total').val(total.toFixed(2));
         }
 
-        // Function to calculate total for fire policy type
         function calculateFireTotal() {
             var basic = parseFloat($('#basic').val()) || 0;
             var terr = parseFloat($('#terr').val()) || 0;

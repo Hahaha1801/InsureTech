@@ -67,6 +67,7 @@ class RegisterController extends Controller
             'role' => ['required', 'string', 'in:Agent,Customer'],
             'phone' => ['required', 'string', 'max:10'], 
             'address' => ['required', 'string', 'max:255'],
+            'brokerage' => ['required'],
         ]);
     }
 
@@ -104,6 +105,7 @@ class RegisterController extends Controller
             $agent->email = $data['email'];
             $agent->phone_no = $data['phone'];
             $agent->address = $data['address'];
+            $agent->brokerage_rate = $data['brokerage'];
             $agent->save();
         }
         elseif ($data['role'] === 'Customer') {

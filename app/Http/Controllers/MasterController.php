@@ -24,24 +24,34 @@ class MasterController extends Controller
     }
 
     public function store(Request $request, $option)
-    {
-        if (!array_key_exists($option, config('dropdownOptions'))) {
-            abort(404);
-        }
-
-        $masterName = $request->input('master_name');
-        $masters = Config::get('dropdownOptions.' . $option, []);
-
-        if (in_array($masterName, $masters)) {
-            return redirect()->back()->withErrors(['master_name' => 'The master name already exists.'])->withInput();
-        }
-
-        $configPath = config_path('dropdownOptions.php');
-        $options = include($configPath);
-        $options[$option][] = $masterName;
-        File::put($configPath, '<?php return ' . var_export($options, true) . ';');
-        Artisan::call('config:clear');
-
-        return redirect()->route('policies.index');
+{
+    if (!array_key_exists($option, config('dropdownOptions'))) {
+        abort(404);
     }
+
+    $masterName = $request->input('master_name');
+    $masters = Config::get('dropdownOptions.' . $option, []);
+
+    if (in_array($masterName, $masters)) {
+        return redirect()->back()->withErrors(['master_name' => 'The master name already exists.'])->withInput();
+    }
+
+    $configPath = config_path('dropdownOptions.php');
+    $options = include($configPath);
+
+    if ($option == 'policy') {
+        $policyBrokerage = $request->input('policy_brokerage');
+        // Concatenate master_name and policy_brokerage
+        $masterWithBrokerage = $masterName . ', ' . $policyBrokerage;
+        $options[$option][] = $masterWithBrokerage;
+    } else {
+        $options[$option][] = $masterName;
+    }
+
+    File::put($configPath, '<?php return ' . var_export($options, true) . ';');
+    Artisan::call('config:clear');
+
+    return redirect()->route('policies.index');
+}
+    
 }
