@@ -20,6 +20,7 @@
                                 <th>Name</th>
                                 <th>Email</th>
                                 <th>Phone No</th>
+                                <th>Current Month Brokerage</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
@@ -29,6 +30,7 @@
                                     <td>{{ $agent->name }}</td>
                                     <td>{{ $agent->email }}</td>
                                     <td>{{ $agent->phone_no }}</td>
+                                    <td>{{ $agent->currentMonthBrokerage }}</td>
                                     <td>
                                         <a href="{{ route('agent.show', $agent->id) }}" class="btn btn-primary">View</a>
                                         <form id="delete-form-{{ $agent->id }}" action="{{ route('agent.destroy', $agent->id) }}" method="POST" style="display: none;">

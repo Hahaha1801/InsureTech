@@ -67,7 +67,7 @@ class RegisterController extends Controller
             'role' => ['required', 'string', 'in:Agent,Customer'],
             'phone' => ['required', 'string', 'max:10'], 
             'address' => ['required', 'string', 'max:255'],
-            'brokerage' => ['required'],
+            
         ]);
     }
 

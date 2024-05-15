@@ -23,12 +23,13 @@
   array (
     0 => 'HDFC ERGO',
     1 => 'Reliance Nippon',
+    2 => 'Travel',
   ),
   'policy' => 
   array (
-      0 => 'Optima Secure, 10',
-      1 => 'Reliance Nippon Cancer Protection Plan, 12',
-      2 => 'SecureLife, 15',
-      3 => 'LifeInsure, 13',
+    0 => 'Optima Secure, 10',
+    1 => 'Reliance Nippon Cancer Protection Plan, 12',
+    2 => 'SecureLife, 15',
+    3 => 'LifeInsure, 13',
   ),
 );
